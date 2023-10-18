@@ -79,6 +79,7 @@ int task_line(char *line, stack_t **stack, unsigned int line_number)
 {
 	char *opcode, *arg;
 	int success = 1;
+	int value;
 
 	opcode = strtok(line, " \t\n");
 	arg = strtok(NULL, " \t\n");
@@ -94,7 +95,8 @@ int task_line(char *line, stack_t **stack, unsigned int line_number)
 			}
 			else
 			{
-				push(line_number);
+				value = atoi(arg);
+				push_to_stack(stack, value);
 			}
 		}
 		else if (strcmp(opcode, "pall") == 0)
