@@ -16,6 +16,7 @@ void free_stack(stack_t *stack)
 		free(current);
 	}
 }
+
 /**
  * main - Start point for the Monty byte code interpreter.
  * @argc: The number of command-line arguments.
@@ -28,6 +29,7 @@ int main(int argc, char *argv[])
 	char line[1024];
 	unsigned int line_number = 0;
 	int success = 1;
+	size_t line_length;
 
 	stack_t *stack = NULL;
 	FILE *monty_file;
@@ -49,10 +51,10 @@ int main(int argc, char *argv[])
 	while (fgets(line, sizeof(line), monty_file) != NULL)
 	{
 		line_number++;
-		if (line[0] == '\n' || line[0] == '#')
-			continue;
-		if (line[strlen(line) - 1] == '\n')
-			line[strlen(line) - 1] = '\0';
+		line_length = strlen(line);
+
+		if (line_length > 0 && line[line_length - 1] == '\n')
+			line[line_length - 1] = '\0';
 
 		success = task_line(line, &stack, line_number);
 		if (!success)
@@ -92,7 +94,7 @@ int task_line(char *line, stack_t **stack, unsigned int line_number)
 			}
 			else
 			{
-				push(stack, atoi(arg));
+				push(line_number);
 			}
 		}
 		else if (strcmp(opcode, "pall") == 0)
@@ -100,43 +102,6 @@ int task_line(char *line, stack_t **stack, unsigned int line_number)
 			pall(stack, line_number);
 		}
 	}
-
-	return (success);
-}
-
-/**
- * read_and_task_file - Read and process a Monty byte code file.
- * @file_name: Name of the Monty file.
- * @stack: Pointer to the stack.
- *
- * Return: 1 on success, 0 on failure.
- */
-
-int read_and_task_file(const char *file_name, stack_t **stack)
-{
-	char *line = NULL;
-	size_t len = 0;
-	unsigned int line_number = 0;
-	int success = 1;
-
-	FILE *monty_file = fopen(file_name, "r");
-
-	if (monty_file == NULL)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", file_name);
-		return (0);
-	}
-
-	while ((fgets(line, len, monty_file)) != NULL)
-	{
-		line_number++;
-		success = task_line(line, stack, line_number);
-		if (!success)
-			break;
-	}
-
-	free(line);
-	fclose(monty_file);
 
 	return (success);
 }
