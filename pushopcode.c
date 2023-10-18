@@ -37,6 +37,7 @@ void push(unsigned int line_count, stack_t **stack)
 void push_to_stack(stack_t **stack, int value)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
+
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed in push_to_stack\n");
