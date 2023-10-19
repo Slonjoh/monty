@@ -12,11 +12,13 @@ void push(unsigned int line_count, stack_t **stack)
 	int a;
 	int i;
 
-	if (arg == NULL)
+	/*
+	 * if (arg == NULL)
 	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_count);
+		fprintf(stderr, L%u: usage: push integer\n, line_count);
 		exit(EXIT_FAILURE);
 	}
+	*/
 
 	for (i = 0; arg[i] != '\0'; i++)
 	{
@@ -25,6 +27,11 @@ void push(unsigned int line_count, stack_t **stack)
 			fprintf(stderr, "L%u: usage: push integer\n", line_count);
 			exit(EXIT_FAILURE);
 		}
+	}
+	if (arg == NULL || arg[0] == '\0')
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_count);
+		exit(EXIT_FAILURE);
 	}
 	a = atoi(arg);
 	push_to_stack(stack, a);

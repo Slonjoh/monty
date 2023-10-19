@@ -85,6 +85,10 @@ int task_line(char *line, stack_t **stack, unsigned int line_number)
 
 	opcode = strtok(line, " \t\n");
 	arg = strtok(NULL, " \t\n");
+	/*
+	 * printf(Debug:
+	 * Processing line %u. Opcode: %s, Argument: %s\n, line_number, opcode, arg);
+	 */
 	if (opcode != NULL)
 	{
 		if (strcmp(opcode, "push") == 0)
