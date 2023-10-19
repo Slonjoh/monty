@@ -46,5 +46,6 @@ int task_line(char *line, stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *stack);
 void push_to_stack(stack_t **stack, int value);
 void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
