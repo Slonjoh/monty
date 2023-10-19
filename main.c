@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE: %s monty_file\n", argv[0]);
+		fprintf(stderr, "USAGE: monty file\n");
 		return (EXIT_FAILURE);
 	}
 
@@ -85,14 +85,13 @@ int task_line(char *line, stack_t **stack, unsigned int line_number)
 
 	opcode = strtok(line, " \t\n");
 	arg = strtok(NULL, " \t\n");
-
 	if (opcode != NULL)
 	{
 		if (strcmp(opcode, "push") == 0)
 		{
 			if (arg == NULL)
 			{
-				fprintf(stderr, "L%u: usage: push integer\n", line_number);
+				fprintf(stderr, "L%u: usage: push integer %s\n", line_number, opcode);
 				success = 0;
 			}
 			else
@@ -102,14 +101,14 @@ int task_line(char *line, stack_t **stack, unsigned int line_number)
 			}
 		}
 		else if (strcmp(opcode, "pint") == 0)
-		{
 			pint(stack, line_number);
-		}
 		else if (strcmp(opcode, "pall") == 0)
-		{
 			pall(stack, line_number);
+		else
+		{
+			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+			success = 0;
 		}
 	}
-
 	return (success);
 }

@@ -18,5 +18,5 @@ void pint(stack_t **stack, unsigned int line_number)
 	while (current->next != NULL)
 		current = current->next;
 
-	printf("%d\n",current->n);
+	printf("%d\n", current->n);
 }
