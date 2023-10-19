@@ -85,6 +85,8 @@ int task_line(char *line, stack_t **stack, unsigned int line_number)
 
 	opcode = strtok(line, " \t\n");
 	arg = strtok(NULL, " \t\n");
+	if (line == NULL || *line == '#' || *line == '\n')
+		return (success);
 	if (opcode != NULL)
 	{
 		if (strcmp(opcode, "push") == 0)
@@ -114,6 +116,12 @@ int task_line(char *line, stack_t **stack, unsigned int line_number)
 			nop(stack, line_number);
 		else if (strcmp(opcode, "sub") == 0)
 			sub(stack, line_number);
+		else if (strcmp(opcode, "div") == 0)
+			div_operator(stack, line_number);
+		else if (strcmp(opcode, "mul") == 0)
+			mul_operator(stack, line_number);
+		else if (strcmp(opcode, "mod") == 0)
+			mod_operator(stack, line_number);
 		else
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
