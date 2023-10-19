@@ -24,6 +24,8 @@ void free_stack(stack_t *stack)
  *
  * Return: EXIT_SUCCESS on success, EXIT_FAILURE on failure.
  */
+
+
 int main(int argc, char *argv[])
 {
 	char line[1024];
@@ -98,6 +100,10 @@ int task_line(char *line, stack_t **stack, unsigned int line_number)
 				value = atoi(arg);
 				push_to_stack(stack, value);
 			}
+		}
+		else if (strcmp(opcode, "pint") == 0)
+		{
+			pint(stack, line_number);
 		}
 		else if (strcmp(opcode, "pall") == 0)
 		{

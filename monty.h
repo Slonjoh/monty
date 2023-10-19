@@ -39,10 +39,12 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_count);
 } instruction_t;
 
+
 void push(unsigned int line_count, stack_t **stack);
 void pall(stack_t **stack, unsigned int line_count);
 int task_line(char *line, stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *stack);
 void push_to_stack(stack_t **stack, int value);
+void pint(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
