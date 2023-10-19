@@ -3,6 +3,7 @@
 /**
  * push - Pushes element onto the stack
  * @line_count: Line num in the Monty byte code file
+ * @stack: Double pointer to the beginning of the stack.
  */
 
 void push(unsigned int line_count, stack_t **stack)
